@@ -1,12 +1,12 @@
-name: 'Eslint Action'
-description: 'Run eslint and report the results inline'
+name: 'Flow Action'
+description: 'Does flow checking'
 runs:
   using: 'node12'
   main: 'dist/index.js'
 inputs:
-  eslint-lib:
+  flow-bin:
     required: true
-    description: 'Path to your eslint library, probably node_modules/eslint'
+    description: 'Path to your flow library, probably node_modules/.bin/flow'
 branding:
   icon: check-circle
   color: red

@@ -27,5 +27,9 @@ jobs:
           flow-bin: ./node_modules/.bin/flow
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: yarn flow --color always --quiet
+      - uses: Khan/flow-action@master
         setup: yarn
+        with:
+          flow-bin: ./node_modules/.bin/flow
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
