@@ -23,7 +23,7 @@ const fs = require('fs');
 async function run(flowBin) {
     const {stdout} = await execProm(`${flowBin} --json`);
     const data /*:{
-        errors: Array<{
+        errors: Arrayn<{
             message: Array<{
                 path: string,
                 loc: {
