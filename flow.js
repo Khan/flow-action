@@ -38,6 +38,7 @@ async function run(flowBin) {
         JSON.parse(stdout);
     /* end flow-uncovered-block */
     if (!data.errors.length) {
+        console.log('No errors');
         return;
     }
     const annotations = [];
