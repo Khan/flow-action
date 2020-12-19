@@ -21,6 +21,7 @@ const execProm = require('actions-utils/exec-prom');
 const fs = require('fs');
 
 async function run(flowBin) {
+    const subtitle = process.env['INPUT_CHECK-RUN-SUBTITLE'];
     const {stdout} = await execProm(`${flowBin} --json`);
     const data /*:{
         errors: Array<{
@@ -53,7 +54,7 @@ async function run(flowBin) {
             }),
         ),
     );
-    await sendReport('Flow', annotations);
+    await sendReport(`Flow${subtitle ? '- ' + subtitle : ''}`, annotations);
 }
 
 const getFlowBin = () /*:string*/ => {
