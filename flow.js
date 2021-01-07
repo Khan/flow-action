@@ -54,7 +54,7 @@ async function run(flowBin) {
             }),
         ),
     );
-    await sendReport(`Flow${subtitle ? '- ' + subtitle : ''}`, annotations);
+    await sendReport(`Flow${subtitle ? ' - ' + subtitle : ''}`, annotations);
 }
 
 const getFlowBin = () /*:string*/ => {
