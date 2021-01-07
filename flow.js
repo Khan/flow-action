@@ -22,7 +22,11 @@ const fs = require('fs');
 
 async function run(flowBin) {
     const subtitle = process.env['INPUT_CHECK-RUN-SUBTITLE'];
-    const {stdout} = await execProm(`${flowBin} --json`);
+    const workingDirectory = process.env['INPUT_CUSTOM-WORKING-DIRECTORY'];
+    const {stdout} = await execProm(`${flowBin} --json`, {
+        rejectOnError: false,
+        cwd: workingDirectory || '.',
+    });
     const data /*:{
         errors: Array<{
             message: Array<{
@@ -54,7 +58,7 @@ async function run(flowBin) {
             }),
         ),
     );
-    await sendReport(`Flow${subtitle ? '- ' + subtitle : ''}`, annotations);
+    await sendReport(`Flow${subtitle ? ' - ' + subtitle : ''}`, annotations);
 }
 
 const getFlowBin = () /*:string*/ => {
