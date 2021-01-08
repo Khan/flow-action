@@ -53,10 +53,7 @@ async function run(flowBin) {
         }>
     }*/ =
         /* flow-uncovered-block */
-        parseWithVerboseError(
-            stdout,
-            stderr,
-        );
+        parseWithVerboseError(stdout, stderr);
     /* end flow-uncovered-block */
     if (!data.errors.length) {
         console.log('No errors');
