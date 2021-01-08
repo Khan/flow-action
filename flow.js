@@ -20,10 +20,23 @@ const execProm = require('actions-utils/exec-prom');
 
 const fs = require('fs');
 
+const parseWithVerboseError = (text, stderr) => {
+    try {
+        return JSON.parse(text); // flow-uncovered-line
+        // flow-next-uncovered-line
+    } catch (err) {
+        console.error('>> ❌ Invalid Json! ❌ <<');
+        console.error('Jest probably had an error, or something is misconfigured');
+        console.error(stderr);
+        console.error(text);
+        throw err; // flow-uncovered-line
+    }
+};
+
 async function run(flowBin) {
     const subtitle = process.env['INPUT_CHECK-RUN-SUBTITLE'];
     const workingDirectory = process.env['INPUT_CUSTOM-WORKING-DIRECTORY'];
-    const {stdout} = await execProm(`${flowBin} --json`, {
+    const {stdout, stderr} = await execProm(`${flowBin} --json`, {
         rejectOnError: false,
         cwd: workingDirectory || '.',
     });
@@ -40,7 +53,10 @@ async function run(flowBin) {
         }>
     }*/ =
         /* flow-uncovered-block */
-        JSON.parse(stdout);
+        parseWithVerboseError(
+            stdout,
+            stderr,
+        );
     /* end flow-uncovered-block */
     if (!data.errors.length) {
         console.log('No errors');
