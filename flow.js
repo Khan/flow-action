@@ -36,10 +36,14 @@ const parseWithVerboseError = (text, stderr) => {
 async function run(flowBin) {
     const subtitle = process.env['INPUT_CHECK-RUN-SUBTITLE'];
     const workingDirectory = process.env['INPUT_CUSTOM-WORKING-DIRECTORY'];
+    console.log(`workingDirectory = ${workingDirectory}`);
+    console.log(`flowBin = ${flowBin}`);
     const {stdout, stderr} = await execProm(`${flowBin} --json`, {
         rejectOnError: false,
         cwd: workingDirectory || '.',
     });
+    console.log(`stdout = ${stdout}`);
+    console.log(`stderr = ${stderr}`);
     const data /*:{
         errors: Array<{
             message: Array<{
@@ -75,6 +79,7 @@ async function run(flowBin) {
 }
 
 const getFlowBin = () /*:string*/ => {
+    console.log(`process.env['INPUT_FLOW-BIN'] = ${process.env['INPUT_FLOW-BIN']}`);
     if (process.env['INPUT_FLOW-BIN']) {
         return process.env['INPUT_FLOW-BIN'];
     }
